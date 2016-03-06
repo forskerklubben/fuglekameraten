@@ -31,12 +31,15 @@ fra = f_fra.read()
 f_fra.close()
 
 til = []
+tilmsg = ""
 with open("./to.txt") as f_to:
     til = f_to.readlines()
 msg = MIMEText("Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/")
 msg['Subject'] = 'Bevegelse i fuglekassen!'
 msg['From'] = fra
-msg['To'] = til
+for to in til:
+    tilmsg += to + ","
+msg['To'] = tilmsg
 
 # IO setup
 led_pin = 3
@@ -80,7 +83,7 @@ def send_email():
 
 def post_tweet():
     try:
-        twitter.update_status(status='Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/')
+        twitter.update_status(status='Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/ (' + time.strftime("%b %d %Y %H:%M:%S", time.gmtime(time.time())) + ')')
     except TwythonError as e:
         print e
 
