@@ -16,7 +16,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-/usr/bin/screen -S birdbox -dms birdbox /data/forskerklubben/fuglekameraten/ustream
-/usr/bin/python /data/forskerklubben/fuglekameraten/fuglekameraten.py &
+/usr/bin/screen -S youtube -dms youtube /data/forskerklubben/fuglekameraten/youtube
+/usr/bin/screen -S birdbox -dms birdbox /usr/bin/python /data/forskerklubben/fuglekameraten/fuglekameraten.py
 
 exit 0
