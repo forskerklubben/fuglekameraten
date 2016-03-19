@@ -47,7 +47,7 @@ def post_tweet():
     try:
         twitter.update_status(status='Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/ (' + time.strftime("%Y-%m-%d %H:%M:%S") + ')')
     except TwythonError as e:
-        print e
+        print(e)
 
 print("Startup")
 while not internet_on():
@@ -80,6 +80,9 @@ til = []
 tilmsg = ""
 with open("/data/forskerklubben/fuglekameraten/to.txt") as f_to:
     til = f_to.readlines()
+for i, member in enumerate(til):
+    til[i] = til[i].rstrip()
+
 msg = MIMEText("Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/")
 msg['Subject'] = 'Bevegelse i fuglekassen!'
 msg['From'] = fra
