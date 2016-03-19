@@ -45,7 +45,7 @@ def send_email():
 
 def post_tweet():
     try:
-        twitter.update_status(status='Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/ (' + time.strftime("%b %d %Y %H:%M:%S", time.gmtime(time.time())) + ')')
+        twitter.update_status(status='Fuglekameraten har detektert bevegelse i fuglekassen! Klikk her: http://www.forskerklubben.no/fuglekamera/ (' + time.strftime("%Y-%m-%d %H:%M:%S") + ')')
     except TwythonError as e:
         print e
 
@@ -118,14 +118,14 @@ while True:
     previous_state = current_state
     current_state = GPIO.input(pir_pin)
     if current_state != previous_state:
-        print(GPIO.input(pir_pin))
+        print(time.strftime("%Y-%m-%d %H:%M:%S") + ": " + GPIO.input(pir_pin))
         if current_state == False:
             timestamp = time.time()
         else:
             motion = time.time()
             delta = motion - timestamp
             if (delta > twitter_delay):
-                #print("Tweet")
+                print("Tweet")
                 send_email()
                 post_tweet()
 
