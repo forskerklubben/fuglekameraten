@@ -8,7 +8,7 @@ from email.mime.text import MIMEText # Import the email modules we'll need
 from twython import Twython, TwythonError # Twitter bibliotek
 import urllib2 # used to verify internet connection
 
-# Antall sekunder uten bevegelse før vi poster ny tweet
+# Antall sekunder uten bevegelse fÃ¸r vi poster ny tweet
 twitter_delay = 3600 # 1 time
 
 # Funksjoner
@@ -108,7 +108,7 @@ while True:
     # Les lys sensor
     value = analog_read()
     
-    # Skru på lys dersom lyssensoren gir høyere verdi enn 100
+    # Skru pÃ¥ lys dersom lyssensoren gir hÃ¸yere verdi enn 100
     if (value > 100):
         GPIO.output(led_pin, True)
     else:
@@ -118,7 +118,7 @@ while True:
     previous_state = current_state
     current_state = GPIO.input(pir_pin)
     if current_state != previous_state:
-        print(time.strftime("%Y-%m-%d %H:%M:%S") + ": " + GPIO.input(pir_pin))
+        print(time.strftime("%Y-%m-%d %H:%M:%S") + "(pir): ", GPIO.input(pir_pin))
         if current_state == False:
             timestamp = time.time()
         else:
